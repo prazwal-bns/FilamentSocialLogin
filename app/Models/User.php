@@ -23,7 +23,8 @@ class User extends Authenticatable implements HasAvatar
         'name',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'provider_id'
     ];
 
     /**
@@ -39,7 +40,7 @@ class User extends Authenticatable implements HasAvatar
     //to use google avatar in our filament dashboard's user profile
     public function getFilamentAvatarUrl(): string
     {
-        return $this->avatar ? asset($this->avatar) : null;
+        return $this->avatar;
     }
 
     /**

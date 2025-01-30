@@ -18,7 +18,8 @@ public function callback(string $provider)
     // dd($response);
         $user = User::firstWhere('email', $response->getEmail());
         if ($user) {
-            $user->update([$provider . '_id' => $response->getId()]);
+            // $user->update([$provider . '_id' => $response->getId()]);
+            auth()->login($user, true);
         } else {
             $user = User::create([
                 $provider . '_id' => $response->getId(),
