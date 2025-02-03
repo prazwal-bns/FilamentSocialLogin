@@ -6,6 +6,7 @@ use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,6 +24,13 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('avatar')
+                    ->image()
+                    ->avatar()
+                    ->directory('avatars')
+                    ->maxSize(2048)
+                    ->live() 
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('email')
@@ -39,6 +47,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->circular() 
+                    ->label('User Image')
+                    ->sortable()
+                    ->url(fn ($record) => asset('storage/avatars/' . $record->avatar))
+                    ->size(50),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
