@@ -29,7 +29,7 @@ class UserResource extends Resource
                     ->avatar()
                     ->directory('avatars')
                     ->maxSize(2048)
-                    ->live() 
+                    ->live()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
                     ->required(),
@@ -48,7 +48,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('avatar')
-                    ->circular() 
+                    ->circular()
                     ->label('User Image')
                     ->sortable()
                     ->url(fn ($record) => asset('storage/avatars/' . $record->avatar))
@@ -76,6 +76,7 @@ class UserResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
+            ->actionsColumnLabel('Actions')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

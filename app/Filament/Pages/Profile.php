@@ -33,8 +33,8 @@ class Profile extends Page implements HasForms
                     ->image()
                     ->avatar()
                     ->directory('avatars')
-                    ->maxSize(2048)
-                    ->live() 
+                    ->maxSize(5048)
+                    ->live()
                     ->columnSpanFull(),
 
                 TextInput::make('name')
@@ -62,13 +62,13 @@ class Profile extends Page implements HasForms
                 ->submit('Update'),
         ];
     }
-    
+
     public function update(): void
     {
         auth()->user()->update(
             $this->form->getState()
         );
-    
+
         Notification::make()
             ->title('Profile updated!')
             ->success()
