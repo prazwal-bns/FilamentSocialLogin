@@ -38,9 +38,16 @@ class User extends Authenticatable implements HasAvatar
     ];
 
     //to use google avatar in our filament dashboard's user profile
-    public function getFilamentAvatarUrl(): string
+    public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar ? asset('storage/' .$this->avatar) : 'https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg';
+        if ($this->avatar) {
+            if (filter_var($this->avatar, FILTER_VALIDATE_URL)) {
+                return $this->avatar;
+            }
+            return asset('storage/' . $this->avatar);
+        }
+        
+        return 'https://img.freepik.com/premium-vector/business-global-economy_24877-41082.jpg';
     }
 
     /**
