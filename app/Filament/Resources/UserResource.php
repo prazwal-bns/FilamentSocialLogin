@@ -51,7 +51,7 @@ class UserResource extends Resource
                     ->circular()
                     ->label('User Image')
                     ->sortable()
-                    ->url(fn ($record) => asset('storage/avatars/' . $record->avatar))
+                    ->url(fn ($record) => asset('storage/' . $record->avatar))
                     ->size(50),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
